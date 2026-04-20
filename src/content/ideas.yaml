@@ -464,3 +464,75 @@
   subregion: peninsula_south
   access: [car]
   tags: [museum, daytrip]
+
+- id: dandelion-chocolate-tour
+  title: "Dandelion Chocolate factory tour and tasting in the Mission"
+  region: sf
+  subregion: middle
+  tags: [food, quirky]
+
+- id: sf-crosstown-trail
+  title: "Hike a scenic section of the 17-mile SF Crosstown Trail"
+  region: sf
+  subregion: middle
+  tags: [hike, active, views]
+
+- id: pacific-pinball-alameda
+  title: "Play vintage arcade games at the Pacific Pinball Museum"
+  region: bay_area
+  subregion: east_bay
+  access: [car, ferry, bus]
+  tags: [museum, quirky, active]
+
+- id: uss-hornet-alameda
+  title: "Explore the historic USS Hornet Sea, Air & Space Museum"
+  region: bay_area
+  subregion: east_bay
+  access: [car, ferry]
+  tags: [museum, historic]
+
+- id: elkhorn-slough-kayak
+  title: "Kayak with wild sea otters at Elkhorn Slough in Moss Landing"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car]
+  tags: [water, active, daytrip]
+
+- id: mt-davidson-cross
+  title: "Hike through the eucalyptus to the Mount Davidson Cross"
+  region: sf
+  subregion: middle
+  tags: [hike, views, park]
+
+- id: tank-hill-views
+  title: "Secret panoramic city views from Tank Hill"
+  region: sf
+  subregion: middle
+  tags: [views, park, romantic]
+
+- id: ina-coolbrith-park
+  title: "Take the Vallejo steps to Ina Coolbrith Park for skyline views"
+  region: sf
+  subregion: eastside
+  tags: [views, park, romantic, hike]
+
+- id: oakland-redwoods
+  title: "Hike the shaded trails of Reinhardt Redwood Regional Park"
+  region: bay_area
+  subregion: east_bay
+  access: [car]
+  tags: [hike, park]
+
+- id: pulgas-water-temple
+  title: "Visit the Beaux-Arts architecture of the Pulgas Water Temple"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car]
+  tags: [architecture, romantic, historic]
+
+- id: battery-spencer
+  title: "Up-close Golden Gate Bridge views from Battery Spencer"
+  region: bay_area
+  subregion: north_bay
+  access: [car, bus]
+  tags: [views, historic, romantic]

@@ -719,19 +719,18 @@ const VIBE_CHIPS = Array.from(allTags)
     background: none;
     border: none;
     padding: 0;
-    color: var(--terracotta-deep);
-    font-family: var(--body);
-    font-style: italic;
-    font-size: inherit;
+    color: inherit;
+    font: inherit;
     cursor: pointer;
     border-bottom: 1px dotted
-      color-mix(in srgb, var(--terracotta) 55%, transparent);
+      color-mix(in srgb, var(--muted) 50%, transparent);
     line-height: 1.1;
     transition: color 180ms ease, border-color 180ms ease;
   }
   .cat-note-clear:hover {
-    color: var(--terracotta);
-    border-bottom-color: var(--terracotta);
+    color: var(--ink);
+    border-bottom-color:
+      color-mix(in srgb, var(--muted) 80%, transparent);
   }
   .cat-note-clear[hidden] {
     display: none;
@@ -869,10 +868,11 @@ const VIBE_CHIPS = Array.from(allTags)
   }
   .cat-item {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.4rem 1rem;
-    align-items: baseline;
-    padding: 0.55rem 0;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 1.25rem;
+    row-gap: 0.35rem;
+    align-items: start;
+    padding: 0.6rem 0;
     border-bottom: 1px dotted
       color-mix(in srgb, var(--ink) 14%, transparent);
     transition: opacity 180ms ease;
@@ -881,9 +881,26 @@ const VIBE_CHIPS = Array.from(allTags)
     display: none;
   }
   .cat-title {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: center;
     font-family: var(--body);
     color: var(--ink);
     line-height: 1.35;
+  }
+  .cat-access {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+  .cat-tags {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+  }
+  .cat-access:empty,
+  .cat-tags:empty {
+    display: none;
   }
   .cat-tags,
   .cat-access {
@@ -918,6 +935,13 @@ const VIBE_CHIPS = Array.from(allTags)
   @media (max-width: 560px) {
     .cat-item {
       grid-template-columns: 1fr;
+    }
+    .cat-title,
+    .cat-access,
+    .cat-tags {
+      grid-column: 1;
+      grid-row: auto;
+      justify-self: start;
     }
     .cat-tags,
     .cat-access {
