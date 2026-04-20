@@ -192,84 +192,102 @@ const VIBE_CHIPS = Array.from(allTags)
       <h2 class="caps filter-title">The Full Catalogue</h2>
       <p class="cat-note" id="cat-note"></p>
 
-      <div class="cat-column">
-        <h3 class="cat-head">
+      <details class="cat-region" open>
+        <summary class="cat-head">
+          <span class="manicule" aria-hidden="true">☞</span>
           <span class="cat-head-label">In the City</span>
           <span class="cat-head-rule" aria-hidden="true"></span>
           <span class="cat-head-count" data-count="sf">{
             data.filter((d) => d.region === "sf").length
           }</span>
-        </h3>
-        {
-          sfGrouped.map((g) => (
-            <div class="cat-group" data-sub={g.sub}>
-              <h4 class="cat-sub">{g.label}</h4>
-              <ul class="cat-list">
-                {g.items.map((item) => (
-                  <li
-                    class="cat-item"
-                    data-id={item.id}
-                    data-region={item.region}
-                    data-sub={item.subregion}
-                    data-loc-key={`${item.region}:${item.subregion}`}
-                    data-access={item.access.join(",")}
-                    data-tags={item.tags.join(",")}
-                  >
-                    <span class="cat-title">{item.title}</span>
-                    <span class="cat-tags">
-                      {item.tags.map((t) => (
-                        <span class="cat-tag">{t.replace("-", " ")}</span>
-                      ))}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
-      </div>
+        </summary>
+        <div class="cat-body">
+          <div class="cat-body-inner">
+            {
+              sfGrouped.map((g) => (
+                <details class="cat-group" data-sub={g.sub} open>
+                  <summary class="cat-sub">{g.label}</summary>
+                  <div class="cat-body">
+                    <div class="cat-body-inner">
+                      <ul class="cat-list">
+                        {g.items.map((item) => (
+                          <li
+                            class="cat-item"
+                            data-id={item.id}
+                            data-region={item.region}
+                            data-sub={item.subregion}
+                            data-loc-key={`${item.region}:${item.subregion}`}
+                            data-access={item.access.join(",")}
+                            data-tags={item.tags.join(",")}
+                          >
+                            <span class="cat-title">{item.title}</span>
+                            <span class="cat-tags">
+                              {item.tags.map((t) => (
+                                <span class="cat-tag">{t.replace("-", " ")}</span>
+                              ))}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+              ))
+            }
+          </div>
+        </div>
+      </details>
 
-      <div class="cat-column">
-        <h3 class="cat-head">
+      <details class="cat-region" open>
+        <summary class="cat-head">
+          <span class="manicule" aria-hidden="true">☞</span>
           <span class="cat-head-label">Beyond the City</span>
           <span class="cat-head-rule" aria-hidden="true"></span>
           <span class="cat-head-count" data-count="bay_area">{
             data.filter((d) => d.region === "bay_area").length
           }</span>
-        </h3>
-        {
-          outGrouped.map((g) => (
-            <div class="cat-group" data-sub={g.sub}>
-              <h4 class="cat-sub">{g.label}</h4>
-              <ul class="cat-list">
-                {g.items.map((item) => (
-                  <li
-                    class="cat-item"
-                    data-id={item.id}
-                    data-region={item.region}
-                    data-sub={item.subregion}
-                    data-loc-key={`${item.region}:${item.subregion}`}
-                    data-access={item.access.join(",")}
-                    data-tags={item.tags.join(",")}
-                  >
-                    <span class="cat-title">{item.title}</span>
-                    <span class="cat-access">
-                      {item.access.map((a) => (
-                        <span class="cat-access-chip">{a}</span>
-                      ))}
-                    </span>
-                    <span class="cat-tags">
-                      {item.tags.map((t) => (
-                        <span class="cat-tag">{t.replace("-", " ")}</span>
-                      ))}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
-      </div>
+        </summary>
+        <div class="cat-body">
+          <div class="cat-body-inner">
+            {
+              outGrouped.map((g) => (
+                <details class="cat-group" data-sub={g.sub} open>
+                  <summary class="cat-sub">{g.label}</summary>
+                  <div class="cat-body">
+                    <div class="cat-body-inner">
+                      <ul class="cat-list">
+                        {g.items.map((item) => (
+                          <li
+                            class="cat-item"
+                            data-id={item.id}
+                            data-region={item.region}
+                            data-sub={item.subregion}
+                            data-loc-key={`${item.region}:${item.subregion}`}
+                            data-access={item.access.join(",")}
+                            data-tags={item.tags.join(",")}
+                          >
+                            <span class="cat-title">{item.title}</span>
+                            <span class="cat-access">
+                              {item.access.map((a) => (
+                                <span class="cat-access-chip">{a}</span>
+                              ))}
+                            </span>
+                            <span class="cat-tags">
+                              {item.tags.map((t) => (
+                                <span class="cat-tag">{t.replace("-", " ")}</span>
+                              ))}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+              ))
+            }
+          </div>
+        </div>
+      </details>
     </section>
 
     <p class="back"><a href={import.meta.env.BASE_URL}>← back to the notebook</a></p>
@@ -278,6 +296,25 @@ const VIBE_CHIPS = Array.from(allTags)
   <script is:inline define:vars={{ data, quotes: QUOTES }}>
     window.__IDEAS__ = data;
     window.__QUOTES__ = quotes;
+  </script>
+  <script is:inline>
+    // Delay <details open=false> until the slide-up animation finishes so the
+    // grid-row collapse has time to play.
+    document
+      .querySelectorAll("details.cat-region, details.cat-group")
+      .forEach((el) => {
+        const summary = el.querySelector(":scope > summary");
+        if (!summary) return;
+        summary.addEventListener("click", (e) => {
+          if (!el.open) return;
+          e.preventDefault();
+          el.classList.add("closing");
+          window.setTimeout(() => {
+            el.open = false;
+            el.classList.remove("closing");
+          }, 380);
+        });
+      });
   </script>
   <script>
     import "~/components/Randomizer.ts";
@@ -645,24 +682,69 @@ const VIBE_CHIPS = Array.from(allTags)
     margin: -0.6rem 0 2rem;
     min-height: 1.2em;
   }
-  .cat-column {
-    margin-bottom: 2.4rem;
+  .cat-region {
+    margin-bottom: 2rem;
   }
+  .cat-region > summary,
+  .cat-group > summary {
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+  }
+  .cat-region > summary::-webkit-details-marker,
+  .cat-group > summary::-webkit-details-marker,
+  .cat-region > summary::marker,
+  .cat-group > summary::marker {
+    display: none;
+    content: "";
+  }
+  .cat-region > summary:focus-visible,
+  .cat-group > summary:focus-visible {
+    outline: 1px dotted var(--sage-deep);
+    outline-offset: 4px;
+  }
+
   .cat-head {
     display: flex;
     align-items: center;
     gap: 0.9rem;
-    margin: 0 0 1.4rem;
+    padding: 0.4rem 0 1rem;
     font-family: var(--display);
     font-variation-settings: "SOFT" 80, "opsz" 144, "wght" 420;
     font-size: 1.3rem;
     color: var(--ink);
+  }
+  .manicule {
+    display: inline-block;
+    color: var(--sage-deep);
+    font-size: 1.05em;
+    line-height: 1;
+    width: 1.2em;
+    transform: rotate(90deg);
+    transform-origin: 50% 55%;
+    transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .cat-region:not([open]) > summary .manicule {
+    transform: rotate(0deg);
+  }
+  .cat-region > summary:hover .manicule {
+    color: var(--terracotta-deep);
+  }
+  .cat-head-label {
+    transition: letter-spacing 320ms ease;
+  }
+  .cat-region:not([open]) > summary:hover .cat-head-label {
+    letter-spacing: 0.015em;
   }
   .cat-head-rule {
     flex: 1;
     border-bottom: 1px solid
       color-mix(in srgb, var(--sage-deep) 38%, transparent);
     transform: translateY(-0.2em);
+    transition: opacity 300ms ease;
+  }
+  .cat-region:not([open]) > summary .cat-head-rule {
+    opacity: 0.5;
   }
   .cat-head-count {
     font-family: var(--body);
@@ -671,20 +753,56 @@ const VIBE_CHIPS = Array.from(allTags)
     color: var(--muted);
     font-variant-numeric: tabular-nums;
   }
+
   .cat-group {
-    margin-bottom: 1.3rem;
+    margin-bottom: 1.1rem;
   }
   .cat-group[hidden] {
     display: none;
   }
   .cat-sub {
+    display: inline-block;
     font-family: var(--display);
     font-style: italic;
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     font-weight: 400;
     color: var(--sage-deep);
     margin: 0 0 0.5rem;
-    letter-spacing: 0.04em;
+    padding: 0.15rem 0;
+    border-bottom: 1px solid transparent;
+    letter-spacing: 0.02em;
+    transition:
+      color 220ms ease,
+      border-color 220ms ease,
+      letter-spacing 300ms ease;
+  }
+  .cat-group[open] > summary .cat-sub {
+    color: var(--ink);
+    border-bottom-color:
+      color-mix(in srgb, var(--sage-deep) 32%, transparent);
+  }
+  .cat-group:not([open]) > summary:hover .cat-sub {
+    color: var(--ink);
+    letter-spacing: 0.06em;
+    border-bottom-color:
+      color-mix(in srgb, var(--sage-deep) 22%, transparent);
+  }
+
+  /* CSS-only collapse without measuring heights */
+  .cat-body {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 380ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .cat-body-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .cat-region:not([open]) > .cat-body,
+  .cat-group:not([open]) > .cat-body,
+  .cat-region.closing > .cat-body,
+  .cat-group.closing > .cat-body {
+    grid-template-rows: 0fr;
   }
   .cat-list {
     list-style: none;
