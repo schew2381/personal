@@ -63,7 +63,8 @@ const metaTags = $<HTMLSpanElement>("#meta-tags");
 const pickBtn = $<HTMLButtonElement>("#pick");
 const resetBtn = $<HTMLButtonElement>("#reset");
 const poolEl = $<HTMLParagraphElement>("#pool");
-const catNote = $<HTMLParagraphElement>("#cat-note");
+const catNoteText = $<HTMLSpanElement>("#cat-note-text");
+const catNoteClear = $<HTMLButtonElement>("#cat-note-clear");
 
 function filtered(): Idea[] {
   const locs = state.locations;
@@ -121,10 +122,18 @@ function applyCatalogueFilter(pool: Idea[], filtering: boolean) {
     el.hidden = !ids.has(id);
   });
   // hide empty subregion groups
-  $$<HTMLDivElement>(".cat-group").forEach((g) => {
-    const visible = Array.from(g.querySelectorAll<HTMLLIElement>(".cat-item"))
-      .some((li) => !li.hidden);
+  $$<HTMLDetailsElement>("details.cat-group").forEach((g) => {
+    const visible = Array.from(
+      g.querySelectorAll<HTMLLIElement>(".cat-item"),
+    ).some((li) => !li.hidden);
     g.hidden = !visible;
+  });
+  // hide empty region sections
+  $$<HTMLDetailsElement>("details.cat-region").forEach((r) => {
+    const visible = Array.from(
+      r.querySelectorAll<HTMLDetailsElement>("details.cat-group"),
+    ).some((g) => !g.hidden);
+    r.hidden = !visible;
   });
   // update region counts
   const sfCount = pool.filter((p) => p.region === "sf").length;
@@ -137,11 +146,25 @@ function applyCatalogueFilter(pool: Idea[], filtering: boolean) {
   );
   if (sfEl) sfEl.textContent = String(sfCount);
   if (bayEl) bayEl.textContent = String(bayCount);
-  if (catNote) {
-    catNote.textContent = filtering
-      ? `showing ${pool.length} of ${ideas.length} · clear filters to see all`
+
+  if (catNoteText) {
+    catNoteText.textContent = filtering
+      ? `showing ${pool.length} of ${ideas.length}`
       : "";
   }
+  if (catNoteClear) {
+    catNoteClear.hidden = !filtering;
+  }
+}
+
+function clearFilters() {
+  state.locations.clear();
+  state.access.clear();
+  state.tags.clear();
+  $$<HTMLButtonElement>(".chip").forEach((c) =>
+    c.setAttribute("aria-pressed", "false"),
+  );
+  refreshPool();
 }
 
 function toggleChip(btn: HTMLButtonElement) {
@@ -275,15 +298,10 @@ function init() {
   pickBtn.addEventListener("click", () => {
     void roll();
   });
-  resetBtn.addEventListener("click", () => {
-    state.locations.clear();
-    state.access.clear();
-    state.tags.clear();
-    $$<HTMLButtonElement>(".chip").forEach((c) =>
-      c.setAttribute("aria-pressed", "false"),
-    );
-    refreshPool();
-  });
+  resetBtn.addEventListener("click", clearFilters);
+  if (catNoteClear) {
+    catNoteClear.addEventListener("click", clearFilters);
+  }
   refreshPool();
 }
 
