@@ -2,6 +2,7 @@
 import "~/styles/global.css";
 import PaperBackground from "~/components/PaperBackground.astro";
 import Botanicals from "~/components/Botanicals.astro";
+import PlantTrail from "~/components/PlantTrail.astro";
 
 interface Props {
   title: string;
@@ -52,6 +53,7 @@ const { title, variant = "page" } = Astro.props;
   <body>
     <PaperBackground />
     <Botanicals variant={variant} />
+    <PlantTrail />
     <main class="frame">
       <slot />
     </main>
