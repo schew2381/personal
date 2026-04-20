@@ -37,12 +37,15 @@ const plants = Array.from(byPlant.entries())
   const layer = document.getElementById("plant-trail");
   const plants = (window as unknown as { __PLANTS__: Plant[] }).__PLANTS__;
 
-  const MIN_INTERVAL = 1400; // ms between spawns
+  const MIN_INTERVAL = 1800; // ms between spawns
   const MIN_TRAVEL = 180; // px since last spawn
   const MAX_LIVE = 4;
-  const LIFECYCLE = 8000; // ms crossfading stages
-  const SPAWN_MS = 800;
-  const FADE_MS = 1400;
+  // Stage slots sum to 16000ms. Each later stage is longer; stage 6 holds
+  // the longest. Minimum slot is 1500ms so no transition ever feels rushed.
+  const STAGE_SLOTS = [1500, 1700, 2000, 2500, 3300, 5000];
+  const LIFECYCLE = STAGE_SLOTS.reduce((a, b) => a + b, 0);
+  const SPAWN_MS = 900;
+  const FADE_MS = 1600;
   const INTERACTIVE_SEL =
     'a, button, summary, input, label, [role="button"]';
 
@@ -135,18 +138,34 @@ const plants = Array.from(byPlant.entries())
     el.style.top = `${spot.y}px`;
 
     const stagesCount = plant.stages.length;
-    const slot = LIFECYCLE / stagesCount;
+    // Cumulative start time of each stage.
+    const starts: number[] = [];
+    let running = 0;
+    for (let i = 0; i < stagesCount; i++) {
+      starts.push(running);
+      running += STAGE_SLOTS[i] ?? STAGE_SLOTS[STAGE_SLOTS.length - 1];
+    }
+    const OVERLAP = 650; // ms of crossfade between adjacent stages
+    const EASE = "cubic-bezier(0.42, 0, 0.58, 1)"; // symmetric S-curve
     plant.stages.forEach((src, i) => {
       const img = document.createElement("img");
       img.src = src;
       img.alt = "";
       img.draggable = false;
       img.className = `stage stage-${i}`;
-      img.style.animationDelay = `${i * slot}ms`;
-      // Each stage overlaps the next by ~one slot so the handoff is a
-      // soft crossfade instead of a hard swap.
-      img.style.animationDuration =
-        i === stagesCount - 1 ? `${slot * 2}ms` : `${slot * 2}ms`;
+      // Two independent animations per stage: fade-in then (for all but
+      // the last stage) fade-out. Using the SAME symmetric S-curve for
+      // both means during a crossfade the outgoing and incoming stages
+      // sum to ~1 opacity throughout — no ghost, no peak, no dip.
+      const inDelay = starts[i];
+      const outDelay = starts[i] + STAGE_SLOTS[i];
+      const anims = [`stage-fade-in ${OVERLAP}ms ${EASE} ${inDelay}ms both`];
+      if (i !== stagesCount - 1) {
+        anims.push(
+          `stage-fade-out ${OVERLAP}ms ${EASE} ${outDelay}ms both`,
+        );
+      }
+      img.style.animation = anims.join(", ");
       el.appendChild(img);
     });
 
@@ -224,7 +243,6 @@ const plants = Array.from(byPlant.entries())
     height: 100%;
     object-fit: contain;
     opacity: 0;
-    animation: stage-life ease-in-out forwards;
     user-select: none;
     -webkit-user-drag: none;
     pointer-events: none;
@@ -255,22 +273,17 @@ const plants = Array.from(byPlant.entries())
     }
   }
 
-  /* Each stage runs its own ease-in-out bell. Stages overlap by one
-     slot so the handoff between two stages is a soft crossfade. The
-     last stage uses a rise-and-hold so the plant doesn't disappear
-     before .fading takes over. */
-  @keyframes stage-life {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
+  /* Stage crossfades use independent fade-in and fade-out pairs with
+     the same symmetric S-curve. Two adjacent stages crossfading this
+     way keep their summed opacity ~1 the whole time (no ghost peak,
+     no mid-fade dip). */
+  @keyframes stage-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
-  #plant-trail .stage.stage-5 {
-    animation-name: stage-life-last;
-  }
-  @keyframes stage-life-last {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 1; }
+  @keyframes stage-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
