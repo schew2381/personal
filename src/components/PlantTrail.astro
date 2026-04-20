@@ -157,12 +157,21 @@ const plants = Array.from(byPlant.entries())
       // the last stage) fade-out. Using the SAME symmetric S-curve for
       // both means during a crossfade the outgoing and incoming stages
       // sum to ~1 opacity throughout — no ghost, no peak, no dip.
+      //
+      // Use `forwards`, not `both`: with `both`, the fade-out's
+      // backward fill would lock opacity to 1 during every delay
+      // period before its start, overriding the fade-in entirely and
+      // making stages pop instead of fade. `forwards` only fills AFTER
+      // the animation ends, letting the CSS default opacity: 0 govern
+      // the pre-animation state.
       const inDelay = starts[i];
       const outDelay = starts[i] + STAGE_SLOTS[i];
-      const anims = [`stage-fade-in ${OVERLAP}ms ${EASE} ${inDelay}ms both`];
+      const anims = [
+        `stage-fade-in ${OVERLAP}ms ${EASE} ${inDelay}ms forwards`,
+      ];
       if (i !== stagesCount - 1) {
         anims.push(
-          `stage-fade-out ${OVERLAP}ms ${EASE} ${outDelay}ms both`,
+          `stage-fade-out ${OVERLAP}ms ${EASE} ${outDelay}ms forwards`,
         );
       }
       img.style.animation = anims.join(", ");
