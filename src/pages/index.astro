@@ -1,0 +1,215 @@
+---
+import Base from "~/layouts/Base.astro";
+import flourish from "~/assets/botanicals/flourish.svg?raw";
+
+const entries = [
+  {
+    numeral: "I",
+    title: "Date Randomizer",
+    annotation: "a botanical oracle for choosing the day",
+    href: `${import.meta.env.BASE_URL.replace(/\/$/, "")}/randomizer`,
+    available: true,
+  },
+  {
+    numeral: "II",
+    title: "— awaiting transcription —",
+    annotation: "",
+    href: "",
+    available: false,
+  },
+  {
+    numeral: "III",
+    title: "— awaiting transcription —",
+    annotation: "",
+    href: "",
+    available: false,
+  },
+  {
+    numeral: "IV",
+    title: "— awaiting transcription —",
+    annotation: "",
+    href: "",
+    available: false,
+  },
+];
+---
+
+<Base title="Seiji's Field Notebook" variant="home">
+  <section class="page">
+    <div class="flourish" set:html={flourish} />
+    <h1 class="title">Seiji's Field Notebook</h1>
+    <p class="subtitle">
+      <span class="caps">Vol. I</span>
+      <span class="dot">·</span>
+      <span class="caps">MMXXVI</span>
+    </p>
+    <p class="script lede">gathered specimens & small machines</p>
+
+    <hr class="rule" />
+
+    <ol class="toc" role="list">
+      {
+        entries.map((e) => (
+          <li class={`entry${e.available ? "" : " entry--muted"}`}>
+            <span class="num">{e.numeral}.</span>
+            {e.available ? (
+              <a class="link" href={e.href}>
+                <span class="t">{e.title}</span>
+                <span class="leader" aria-hidden="true" />
+                <span class="ann">{e.annotation}</span>
+              </a>
+            ) : (
+              <span class="link link--disabled">
+                <span class="t">{e.title}</span>
+                <span class="leader" aria-hidden="true" />
+                <span class="ann">pending</span>
+              </span>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+
+    <hr class="rule" />
+
+    <p class="colophon">
+      Pressed & bound in San Francisco. New volumes added
+      as they germinate.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .page {
+    max-width: 42rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .flourish {
+    width: 240px;
+    margin: 0 auto 2rem;
+    color: var(--sage-deep);
+    opacity: 0.85;
+  }
+  .flourish :global(svg) {
+    width: 100%;
+    height: auto;
+  }
+  .title {
+    font-size: clamp(2.6rem, 6vw, 3.8rem);
+    font-variation-settings: "SOFT" 80, "opsz" 144, "wght" 380;
+    line-height: 1.05;
+  }
+  .subtitle {
+    margin: 0.8rem 0 0.2rem;
+    color: var(--muted);
+  }
+  .subtitle .dot {
+    margin: 0 0.5rem;
+    color: var(--sage);
+  }
+  .lede {
+    margin-top: 0.8rem;
+  }
+  .toc {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+  .entry {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    padding: 0.65rem 0;
+    font-size: 1.15rem;
+    border-bottom: 1px dashed
+      color-mix(in srgb, var(--ink) 14%, transparent);
+  }
+  .entry:last-child {
+    border-bottom: none;
+  }
+  .entry .num {
+    font-family: var(--display);
+    color: var(--muted);
+    width: 2.2rem;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .link {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex: 1;
+    min-width: 0;
+  }
+  .t {
+    white-space: nowrap;
+    font-family: var(--display);
+    font-variation-settings: "SOFT" 60, "opsz" 72, "wght" 420;
+  }
+  .leader {
+    flex: 1;
+    border-bottom: 1.5px dotted
+      color-mix(in srgb, var(--ink) 28%, transparent);
+    transform: translateY(-0.28em);
+    margin: 0 0.3rem;
+  }
+  .ann {
+    font-style: italic;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  a.link {
+    position: relative;
+    transition: color 200ms ease;
+  }
+  a.link:hover .t {
+    color: var(--terracotta-deep);
+  }
+  a.link:hover .leader {
+    border-bottom-color: var(--terracotta);
+  }
+  a.link:hover .ann {
+    color: var(--terracotta-deep);
+  }
+  a.link::after {
+    content: "↗";
+    position: absolute;
+    right: -1.2rem;
+    top: -0.1em;
+    color: var(--terracotta);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 220ms ease, transform 220ms ease;
+  }
+  a.link:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .entry--muted {
+    color: var(--muted);
+  }
+  .entry--muted .t,
+  .entry--muted .ann {
+    color: var(--muted);
+    font-style: italic;
+  }
+  .colophon {
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+  @media (max-width: 540px) {
+    .t {
+      white-space: normal;
+    }
+    .leader {
+      display: none;
+    }
+    .link {
+      flex-wrap: wrap;
+    }
+  }
+</style>

@@ -1,0 +1,500 @@
+---
+import { getCollection } from "astro:content";
+import Base from "~/layouts/Base.astro";
+
+const ideas = await getCollection("ideas");
+const data = ideas.map((i) => ({ id: i.id, ...i.data }));
+
+const LOCATION_GROUPS = [
+  {
+    label: "San Francisco",
+    key: "sf",
+    chips: [
+      { id: "sf:westside", label: "Westside" },
+      { id: "sf:eastside", label: "Eastside" },
+      { id: "sf:middle", label: "Middle" },
+      { id: "sf:north", label: "North" },
+    ],
+  },
+  {
+    label: "Outside the City",
+    key: "bay_area",
+    chips: [
+      { id: "bay_area:north_bay", label: "North Bay & Marin" },
+      { id: "bay_area:east_bay", label: "East Bay" },
+      { id: "bay_area:peninsula_south", label: "Peninsula & South" },
+    ],
+  },
+];
+
+const ACCESS_CHIPS = [
+  { id: "car", label: "Car" },
+  { id: "ferry", label: "Ferry" },
+  { id: "bart", label: "BART" },
+  { id: "caltrain", label: "Caltrain" },
+  { id: "smart", label: "SMART" },
+  { id: "bus", label: "Bus" },
+];
+
+const allTags = new Set<string>();
+data.forEach((d) => d.tags.forEach((t) => allTags.add(t)));
+const VIBE_CHIPS = Array.from(allTags)
+  .sort()
+  .map((t) => ({ id: t, label: t.replace("-", " ") }));
+---
+
+<Base title="Date Randomizer — a botanical oracle">
+  <section class="wrap">
+    <header class="head">
+      <p class="caps eyebrow">Project I</p>
+      <h1 class="title">A Botanical Oracle</h1>
+      <p class="script sub">for choosing an afternoon</p>
+      <p class="blurb">
+        Fifty-eight specimens catalogued from field notes. Narrow by
+        where, how you'd get there, and the kind of day you want —
+        then let the notebook pick one.
+      </p>
+    </header>
+
+    <div class="card" id="card" data-state="idle">
+      <svg class="card-vine" viewBox="0 0 680 340" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M20 20 Q 340 4 660 20 Q 676 170 660 320 Q 340 336 20 320 Q 4 170 20 20 Z"/>
+      </svg>
+
+      <div class="aperture" id="aperture" aria-live="polite">
+        <div class="ticker-slot">
+          <span class="ticker" id="ticker">press randomize</span>
+        </div>
+      </div>
+
+      <div class="meta" id="meta" hidden>
+        <div class="meta-row">
+          <span class="meta-label">where</span>
+          <span class="meta-val" id="meta-where"></span>
+        </div>
+        <div class="meta-row" id="meta-access-row" hidden>
+          <span class="meta-label">access</span>
+          <span class="meta-val" id="meta-access"></span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">vibe</span>
+          <span class="meta-val tag-list" id="meta-tags"></span>
+        </div>
+        <p class="script stamp" id="stamp">today's expedition</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="pick" id="pick" type="button">
+        <span class="pick-inner">Randomize</span>
+      </button>
+      <button class="reset" id="reset" type="button">Reset filters</button>
+      <p class="pool" id="pool"></p>
+    </div>
+
+    <section class="filters">
+      <h2 class="caps filter-title">Filters</h2>
+
+      <fieldset class="group">
+        <legend class="caps">Location</legend>
+        {
+          LOCATION_GROUPS.map((g) => (
+            <div class="group-row">
+              <span class="group-label">{g.label}</span>
+              <div class="chips">
+                {g.chips.map((c) => (
+                  <button
+                    type="button"
+                    class="chip"
+                    data-kind="location"
+                    data-value={c.id}
+                  >
+                    <span class="mark" aria-hidden="true" />
+                    {c.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </fieldset>
+
+      <fieldset class="group">
+        <legend class="caps">Access (out of the city)</legend>
+        <div class="chips">
+          {
+            ACCESS_CHIPS.map((c) => (
+              <button
+                type="button"
+                class="chip"
+                data-kind="access"
+                data-value={c.id}
+              >
+                <span class="mark" aria-hidden="true" />
+                {c.label}
+              </button>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend class="caps">Vibe</legend>
+        <div class="chips">
+          {
+            VIBE_CHIPS.map((c) => (
+              <button
+                type="button"
+                class="chip"
+                data-kind="tag"
+                data-value={c.id}
+              >
+                <span class="mark" aria-hidden="true" />
+                {c.label}
+              </button>
+            ))
+          }
+        </div>
+      </fieldset>
+    </section>
+
+    <p class="back"><a href={import.meta.env.BASE_URL}>← back to the notebook</a></p>
+  </section>
+
+  <script is:inline define:vars={{ data }}>
+    window.__IDEAS__ = data;
+  </script>
+  <script>
+    import "~/components/Randomizer.ts";
+  </script>
+</Base>
+
+<style>
+  .wrap {
+    max-width: 44rem;
+    margin: 0 auto;
+  }
+  .head {
+    text-align: center;
+    margin-bottom: 2.4rem;
+  }
+  .eyebrow {
+    margin: 0 0 1rem;
+  }
+  .title {
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    font-variation-settings: "SOFT" 100, "opsz" 144, "wght" 380;
+    line-height: 1.08;
+  }
+  .sub {
+    margin: 0.3rem 0 1.2rem;
+  }
+  .blurb {
+    max-width: 28rem;
+    margin: 0 auto;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .card {
+    position: relative;
+    padding: 2.6rem 2rem 2.2rem;
+    min-height: 260px;
+    background: color-mix(in srgb, var(--paper-warm) 60%, var(--paper));
+    box-shadow:
+      0 1px 0 rgba(60, 45, 25, 0.06),
+      0 18px 40px -24px rgba(60, 45, 25, 0.25);
+  }
+  .card-vine {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    color: var(--sage-deep);
+    overflow: visible;
+  }
+  .card-vine path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.2;
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    opacity: 0.6;
+  }
+  .card[data-state="revealed"] .card-vine path {
+    animation: draw 1400ms ease-out forwards;
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .aperture {
+    position: relative;
+    min-height: 3.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .ticker-slot {
+    position: relative;
+    overflow: hidden;
+    padding: 0.3em 0;
+    width: 100%;
+  }
+  .ticker {
+    display: block;
+    font-family: var(--display);
+    font-variation-settings: "SOFT" 60, "opsz" 144, "wght" 380;
+    font-size: clamp(1.45rem, 3.4vw, 2.1rem);
+    line-height: 1.2;
+    color: var(--ink);
+    will-change: transform, opacity, filter;
+  }
+  .ticker.rolling {
+    transform: translateY(-4px);
+    filter: blur(0.6px);
+    opacity: 0.9;
+  }
+  .ticker.settling {
+    animation: settle 280ms ease-out both;
+  }
+  @keyframes settle {
+    0% {
+      transform: translateY(6px);
+      filter: blur(1.4px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+
+  .meta {
+    margin-top: 1.6rem;
+    padding-top: 1.2rem;
+    border-top: 1px dashed
+      color-mix(in srgb, var(--ink) 16%, transparent);
+    display: grid;
+    gap: 0.6rem;
+    opacity: 0;
+    animation: fadein 400ms ease-out 180ms forwards;
+  }
+  .meta[hidden] {
+    display: none;
+  }
+  @keyframes fadein {
+    to {
+      opacity: 1;
+    }
+  }
+  .meta-row {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    font-size: 1rem;
+  }
+  .meta-label {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 0.68rem;
+    color: var(--muted);
+    width: 4.2rem;
+    flex-shrink: 0;
+  }
+  .meta-val {
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-style: normal;
+  }
+  .tag-list .tag {
+    padding: 0.1rem 0.55rem;
+    border: 1px solid
+      color-mix(in srgb, var(--sage-deep) 40%, transparent);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    color: var(--sage-deep);
+    background: color-mix(in srgb, var(--sage) 8%, transparent);
+  }
+  .stamp {
+    grid-column: 1 / -1;
+    text-align: right;
+    color: var(--terracotta-deep);
+    opacity: 0.85;
+    margin-top: 0.4rem;
+  }
+
+  .controls {
+    margin: 1.6rem 0 2.6rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .pick {
+    font-family: var(--display);
+    font-size: 1rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.8rem;
+    background: transparent;
+    color: var(--terracotta-deep);
+    border: 1.5px solid var(--terracotta);
+    cursor: pointer;
+    position: relative;
+    transition:
+      background 220ms ease,
+      color 220ms ease,
+      transform 120ms ease;
+  }
+  .pick:hover {
+    background: var(--terracotta);
+    color: var(--paper);
+  }
+  .pick:active {
+    transform: translateY(1px);
+  }
+  .pick[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .reset {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 0.95rem;
+    cursor: pointer;
+    padding: 0.4rem 0.6rem;
+  }
+  .reset:hover {
+    color: var(--ink);
+  }
+  .pool {
+    width: 100%;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .filters {
+    border-top: var(--rule);
+    padding-top: 2rem;
+  }
+  .filter-title {
+    text-align: center;
+    margin: 0 0 1.6rem;
+  }
+  .group {
+    border: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+  }
+  .group legend {
+    padding: 0;
+    margin-bottom: 0.7rem;
+  }
+  .group-row {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 0.6rem;
+    align-items: start;
+    margin-bottom: 0.6rem;
+  }
+  .group-label {
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--muted);
+    padding-top: 0.35rem;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid
+      color-mix(in srgb, var(--ink) 28%, transparent);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink-soft);
+    font-family: var(--body);
+    font-size: 0.92rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease;
+  }
+  .chip:hover {
+    border-color: var(--sage-deep);
+    color: var(--ink);
+  }
+  .chip .mark {
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid
+      color-mix(in srgb, var(--ink) 26%, transparent);
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--sage);
+    border-color: var(--sage-deep);
+    color: var(--paper);
+  }
+  .chip[aria-pressed="true"] .mark {
+    background: var(--paper);
+    border-color: var(--paper);
+  }
+  .chip[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .back {
+    text-align: center;
+    margin-top: 3rem;
+  }
+  .back a {
+    color: var(--muted);
+    font-style: italic;
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--muted) 40%, transparent);
+    padding-bottom: 1px;
+  }
+  .back a:hover {
+    color: var(--terracotta-deep);
+    border-bottom-color: var(--terracotta);
+  }
+
+  @media (max-width: 560px) {
+    .group-row {
+      grid-template-columns: 1fr;
+    }
+    .group-label {
+      padding-top: 0;
+    }
+  }
+</style>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" fill="none" aria-hidden="true">
+  <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M100 250 C 102 190, 96 140, 100 70"/>
+    <path d="M100 170 C 80 164, 66 150, 60 132"/>
+    <path d="M100 140 C 120 134, 134 120, 138 104"/>
+    <path d="M100 210 C 84 210, 72 202, 66 190"/>
+    <g transform="translate(100 70)">
+      <path d="M0 -24 C 10 -22, 18 -14, 16 -4 C 22 -8, 30 -2, 28 10 C 30 20, 22 26, 12 24 C 10 34, 0 36, -8 28 C -18 32, -28 22, -24 12 C -32 6, -30 -6, -20 -10 C -20 -20, -10 -26, 0 -24 Z" fill="currentColor" fill-opacity="0.16"/>
+      <circle r="3" fill="currentColor"/>
+    </g>
+  </g>
+</svg>

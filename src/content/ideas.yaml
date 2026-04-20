@@ -1,0 +1,466 @@
+- id: gg-park-bike
+  title: "Bike the full length of Golden Gate Park"
+  region: sf
+  subregion: westside
+  tags: [active, park]
+
+- id: queen-wilhelmina
+  title: "Queen Wilhelmina Garden & the two windmills"
+  region: sf
+  subregion: westside
+  tags: [garden, park]
+
+- id: ocean-beach-bonfire
+  title: "Bonfire at Ocean Beach at sunset"
+  region: sf
+  subregion: westside
+  tags: [beach, sunset, romantic]
+
+- id: lands-end-legion
+  title: "Land's End Trail & the Legion of Honor"
+  region: sf
+  subregion: westside
+  tags: [hike, views, museum]
+
+- id: princess-diaries-house
+  title: "2601 Lyon Street — the Princess Diaries house"
+  region: sf
+  subregion: westside
+  tags: [architecture, quirky]
+
+- id: blue-heron-pedal
+  title: "Pedal-boating at Blue Heron Lake"
+  region: sf
+  subregion: westside
+  tags: [water, park]
+
+- id: sutro-eagles-point
+  title: "Sutro Baths ruins & the Coastal Trail to Eagle's Point"
+  region: sf
+  subregion: westside
+  tags: [hike, views, historic]
+
+- id: baker-beach-picnic
+  title: "Picnic at Baker Beach or Marshall's Beach under the bridge"
+  region: sf
+  subregion: westside
+  tags: [beach, views, food]
+
+- id: conservatory-flowers
+  title: "The tropical Conservatory of Flowers"
+  region: sf
+  subregion: westside
+  tags: [garden]
+
+- id: tiled-steps-grandview
+  title: "16th Avenue Tiled Steps up to Grandview Park at sunset"
+  region: sf
+  subregion: westside
+  tags: [views, active, stargazing, sunset]
+
+- id: spark-social-bouldering
+  title: "Dinner at Spark Social, then bouldering in Dogpatch"
+  region: sf
+  subregion: eastside
+  tags: [food, active]
+
+- id: cable-car-chinatown
+  title: "Cable Car Museum & a new Chinatown restaurant"
+  region: sf
+  subregion: eastside
+  tags: [museum, food, historic]
+
+- id: city-lights-coit
+  title: "City Lights, truffles & coffee, up the Filbert Steps to Coit Tower"
+  region: sf
+  subregion: eastside
+  tags: [shopping, food, hike, views]
+
+- id: exploratorium-afterdark
+  title: "Exploratorium After Dark (Thursday adults-only nights)"
+  region: sf
+  subregion: eastside
+  tags: [museum, nightlife]
+
+- id: ferry-building-market
+  title: "Embarcadero walk to the Ferry Building farmers market"
+  region: sf
+  subregion: eastside
+  tags: [food, shopping]
+
+- id: mccovey-kayak
+  title: "Nighttime tandem kayak at McCovey Cove or Mission Creek"
+  region: sf
+  subregion: eastside
+  tags: [water, nightlife]
+
+- id: oracle-park-game
+  title: "Giants game at Oracle Park & a waterfront walk"
+  region: sf
+  subregion: eastside
+  tags: [active, food]
+
+- id: sfmoma-rooftop
+  title: "SFMOMA & coffee in the rooftop sculpture garden"
+  region: sf
+  subregion: eastside
+  tags: [museum, art]
+
+- id: stagecoach-greens
+  title: "Pizza & mini-golf at Stagecoach Greens"
+  region: sf
+  subregion: eastside
+  tags: [food, active, quirky]
+
+- id: salesforce-park
+  title: "The rooftop park at Salesforce Transit Center"
+  region: sf
+  subregion: eastside
+  tags: [park, views]
+
+- id: hayes-valley-shopping
+  title: "Shopping the length of Hayes Valley"
+  region: sf
+  subregion: middle
+  tags: [shopping, food]
+
+- id: twin-peaks
+  title: "Walk up Twin Peaks"
+  region: sf
+  subregion: middle
+  tags: [hike, views]
+
+- id: sf-botanical
+  title: "San Francisco Botanical Garden"
+  region: sf
+  subregion: middle
+  tags: [garden]
+
+- id: mission-tacos
+  title: "Taco tour of the Mission"
+  region: sf
+  subregion: middle
+  tags: [food]
+
+- id: russian-hill-lombard
+  title: "Pastry on Russian Hill & a stop at Lombard Street"
+  region: sf
+  subregion: middle
+  tags: [architecture, views, food]
+
+- id: bernal-heights
+  title: "Hike up Bernal Heights on a cloudy day"
+  region: sf
+  subregion: middle
+  tags: [hike, views]
+
+- id: candlelight-concert
+  title: "Candlelight Concert at St. Ignatius or a show at Brava"
+  region: sf
+  subregion: middle
+  tags: [nightlife, art, romantic]
+
+- id: buena-vista
+  title: "Hike up Buena Vista Park for downtown views"
+  region: sf
+  subregion: middle
+  tags: [hike, views, park]
+
+- id: seward-slides
+  title: "Slide down the hidden Seward Street Slides"
+  region: sf
+  subregion: middle
+  tags: [quirky, active]
+
+- id: alamo-square-picnic
+  title: "Picnic at Alamo Square in front of the Painted Ladies"
+  region: sf
+  subregion: middle
+  tags: [park, architecture, food]
+
+- id: gg-overlook
+  title: "Golden Gate Overlook"
+  region: sf
+  subregion: north
+  tags: [views]
+
+- id: haas-lilienthal
+  title: "Haas-Lilienthal House tour"
+  region: sf
+  subregion: north
+  tags: [historic, architecture]
+
+- id: alcatraz-night
+  title: "Alcatraz Night Tour for spooky atmosphere"
+  region: sf
+  subregion: north
+  tags: [historic, nightlife]
+
+- id: palace-fine-arts
+  title: "Palace of Fine Arts & a lagoon picnic"
+  region: sf
+  subregion: north
+  tags: [architecture, park, food, romantic]
+
+- id: fort-mason-otg
+  title: "Fort Mason Off the Grid food trucks (Fridays) or the galleries"
+  region: sf
+  subregion: north
+  tags: [food, art]
+
+- id: sunset-bay-cruise
+  title: "Sunset cruise on the Bay from Pier 39 or 41"
+  region: sf
+  subregion: north
+  tags: [water, romantic, sunset]
+
+- id: presidio-tunnel-tops
+  title: "Presidio Tunnel Tops park & food trucks"
+  region: sf
+  subregion: north
+  tags: [park, food, views]
+
+- id: disney-crissy
+  title: "Walt Disney Family Museum, then a walk down to Crissy Field"
+  region: sf
+  subregion: north
+  tags: [museum, park]
+
+- id: sausalito-thrift
+  title: "Ferry to Sausalito & thrifting"
+  region: bay_area
+  subregion: north_bay
+  access: [ferry]
+  tags: [shopping]
+
+- id: six-flags-vallejo
+  title: "Six Flags Discovery Kingdom in Vallejo"
+  region: bay_area
+  subregion: north_bay
+  access: [ferry, car]
+  tags: [active, quirky]
+
+- id: muir-woods
+  title: "Muir Woods & Muir Beach Overlook"
+  region: bay_area
+  subregion: north_bay
+  access: [car, bus]
+  tags: [hike, views, beach]
+
+- id: hawk-hill
+  title: "Hawk Hill & the Marin Headlands bunkers"
+  region: bay_area
+  subregion: north_bay
+  access: [car, bus]
+  tags: [views, historic]
+
+- id: mt-tam
+  title: "Mount Tamalpais East Peak above the clouds"
+  region: bay_area
+  subregion: north_bay
+  access: [car]
+  tags: [views, stargazing, sunset]
+
+- id: cataract-falls
+  title: "Hike Cataract Falls after a good rain"
+  region: bay_area
+  subregion: north_bay
+  access: [car]
+  tags: [hike]
+
+- id: angel-island
+  title: "Angel Island — hike, bike, 360-degree city views"
+  region: bay_area
+  subregion: north_bay
+  access: [ferry]
+  tags: [hike, active, views]
+
+- id: rodeo-beach
+  title: "Rodeo Beach for moody walks & agate hunting"
+  region: bay_area
+  subregion: north_bay
+  access: [car]
+  tags: [beach]
+
+- id: marin-civic
+  title: "Marin County Civic Center — Frank Lloyd Wright architecture"
+  region: bay_area
+  subregion: north_bay
+  access: [car, smart]
+  tags: [architecture]
+
+- id: point-reyes
+  title: "Point Reyes: Cypress Tunnel, Lighthouse, or hike to Alamere Falls"
+  region: bay_area
+  subregion: north_bay
+  access: [car]
+  tags: [hike, views, beach]
+
+- id: tomales-bioluminescence
+  title: "Nighttime bioluminescent kayak in Tomales Bay"
+  region: bay_area
+  subregion: north_bay
+  access: [car]
+  tags: [water, nightlife, stargazing]
+
+- id: stinson-beach
+  title: "Stinson Beach & lunch at a local cafe"
+  region: bay_area
+  subregion: north_bay
+  access: [car, bus]
+  tags: [beach, food]
+
+- id: tiburon-rail-trail
+  title: "Tiburon rail trail & waterfront at Sam's Anchor Cafe"
+  region: bay_area
+  subregion: north_bay
+  access: [ferry, car]
+  tags: [food, views]
+
+- id: napa-valley
+  title: "Napa Valley wine tasting, Wine Train, or a hot air balloon"
+  region: bay_area
+  subregion: north_bay
+  access: [car]
+  tags: [food, daytrip, romantic]
+
+- id: calistoga-hotsprings
+  title: "Calistoga — natural hot springs & mud baths"
+  region: bay_area
+  subregion: north_bay
+  access: [car]
+  tags: [romantic, daytrip]
+
+- id: berkeley-botanical
+  title: "Berkeley Botanical Gardens & UC Berkeley campus walk"
+  region: bay_area
+  subregion: east_bay
+  access: [car, bart, bus]
+  tags: [garden]
+
+- id: greek-theatre
+  title: "Outdoor concert at the Greek Theatre in Berkeley"
+  region: bay_area
+  subregion: east_bay
+  access: [car, bart]
+  tags: [nightlife, art]
+
+- id: lake-merritt
+  title: "Pedal boat or Venetian gondola on Lake Merritt"
+  region: bay_area
+  subregion: east_bay
+  access: [car, bart]
+  tags: [water, romantic]
+
+- id: jack-london
+  title: "Jack London Square waterfront & Sunday farmers market"
+  region: bay_area
+  subregion: east_bay
+  access: [ferry, bart, car]
+  tags: [food, shopping]
+
+- id: tilden-park
+  title: "Tilden Park — antique merry-go-round & Botanic Garden"
+  region: bay_area
+  subregion: east_bay
+  access: [car, bus]
+  tags: [garden, park, quirky]
+
+- id: chabot-space
+  title: "Chabot Space & Science Center — telescope nights"
+  region: bay_area
+  subregion: east_bay
+  access: [car]
+  tags: [museum, stargazing, nightlife]
+
+- id: mt-diablo
+  title: "Mount Diablo summit — views across the whole Bay"
+  region: bay_area
+  subregion: east_bay
+  access: [car]
+  tags: [hike, views]
+
+- id: mission-peak
+  title: "Hike Mission Peak in Fremont"
+  region: bay_area
+  subregion: east_bay
+  access: [car, bart, bus]
+  tags: [hike, views, active]
+
+- id: omca-friday
+  title: "OMCA Friday Nights — food trucks, music, half-off galleries"
+  region: bay_area
+  subregion: east_bay
+  access: [car, bart]
+  tags: [museum, food, nightlife]
+
+- id: rosie-riveter
+  title: "Rosie the Riveter Park — marina trails in Richmond"
+  region: bay_area
+  subregion: east_bay
+  access: [ferry, car]
+  tags: [historic, views]
+
+- id: filoli
+  title: "Filoli Historic House & Garden — Bridgerton-esque"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car, caltrain]
+  tags: [garden, historic, architecture, romantic]
+
+- id: montalvo-arts
+  title: "Montalvo Arts Center villa grounds & trails"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car]
+  tags: [art, hike, architecture]
+
+- id: half-moon-bay
+  title: "Drive down Highway 1 to Half Moon Bay for seafood & cliffs"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car]
+  tags: [food, beach, views, daytrip]
+
+- id: stanford-dish
+  title: "Stanford — the Dish, Cantor Arts, Rodin Sculpture Garden"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car, caltrain]
+  tags: [hike, art, museum]
+
+- id: hakone
+  title: "Hakone Estate & Gardens — Japanese garden stroll"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car]
+  tags: [garden, romantic]
+
+- id: santa-cruz
+  title: "Santa Cruz Boardwalk, Mystery Spot & Henry Cowell redwoods"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car]
+  tags: [beach, hike, quirky, daytrip]
+
+- id: lick-observatory
+  title: "Lick Observatory — winding drives & astronomy nights"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car]
+  tags: [stargazing, views, nightlife]
+  notes: "Currently closed."
+
+- id: pescadero
+  title: "Pescadero — Pigeon Point Lighthouse, goat dairy, artichoke bread"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car]
+  tags: [food, views, daytrip]
+
+- id: monterey-carmel
+  title: "Monterey Bay Aquarium & fairytale Carmel-by-the-Sea"
+  region: bay_area
+  subregion: peninsula_south
+  access: [car]
+  tags: [museum, daytrip]

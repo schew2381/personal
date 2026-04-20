@@ -1,0 +1,19 @@
+:root {
+  --paper: #f0e4cf;
+  --paper-warm: #e8d8ba;
+  --paper-shadow: #d9c6a4;
+  --ink: #2b2319;
+  --ink-soft: #4a3d2c;
+  --muted: #8c7a5b;
+  --sage: #7c8c6c;
+  --sage-deep: #5a6b4d;
+  --terracotta: #b04b30;
+  --terracotta-deep: #8f3920;
+
+  --display: "Fraunces Variable", "Fraunces", Georgia, serif;
+  --body: "EB Garamond", Georgia, serif;
+  --script: "Italianno", cursive;
+
+  --measure: 38rem;
+  --rule: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+}

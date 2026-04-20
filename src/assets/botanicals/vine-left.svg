@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 900" fill="none" aria-hidden="true">
+  <g stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M60 10 C 40 120, 120 200, 70 320 S 30 540, 100 640 S 50 820, 90 890"/>
+    <path d="M68 90 C 30 90, 10 70, 20 50 C 30 35, 60 40, 68 70 Z" fill="currentColor" fill-opacity="0.18" stroke-opacity="0.9"/>
+    <path d="M105 160 C 140 150, 160 130, 150 110 C 140 95, 110 105, 102 140 Z" fill="currentColor" fill-opacity="0.14"/>
+    <path d="M72 240 C 30 250, 14 230, 26 210 C 40 195, 70 210, 78 235 Z" fill="currentColor" fill-opacity="0.18"/>
+    <path d="M115 330 C 155 320, 170 300, 158 280 C 145 266, 116 282, 110 315 Z" fill="currentColor" fill-opacity="0.12"/>
+    <path d="M72 430 C 34 440, 18 420, 30 400 C 44 385, 72 400, 80 425 Z" fill="currentColor" fill-opacity="0.18"/>
+    <path d="M102 520 C 138 510, 156 492, 146 472 C 134 458, 104 470, 98 502 Z" fill="currentColor" fill-opacity="0.14"/>
+    <path d="M80 620 C 40 628, 22 608, 34 590 C 48 574, 78 590, 86 616 Z" fill="currentColor" fill-opacity="0.18"/>
+    <path d="M110 700 C 148 690, 164 672, 152 652 C 140 638, 110 654, 104 684 Z" fill="currentColor" fill-opacity="0.12"/>
+    <path d="M75 790 C 35 800, 20 780, 32 760 C 46 744, 76 760, 82 784 Z" fill="currentColor" fill-opacity="0.18"/>
+    <circle cx="90" cy="890" r="2.4" fill="currentColor" fill-opacity="0.6"/>
+  </g>
+</svg>

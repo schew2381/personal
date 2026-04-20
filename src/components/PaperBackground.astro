@@ -1,0 +1,35 @@
+---
+// Paper grain + warmth gradient — fixed, pointer-inert.
+---
+
+<div class="paper" aria-hidden="true"></div>
+
+<style>
+  .paper {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(
+        120% 80% at 50% -10%,
+        color-mix(in srgb, var(--paper-warm) 75%, transparent),
+        transparent 60%
+      ),
+      radial-gradient(
+        120% 80% at 50% 110%,
+        color-mix(in srgb, var(--paper-shadow) 55%, transparent),
+        transparent 60%
+      ),
+      var(--paper);
+  }
+  .paper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.14 0 0 0 0 0.1 0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+    background-size: 260px 260px;
+    opacity: 0.09;
+    mix-blend-mode: multiply;
+  }
+</style>

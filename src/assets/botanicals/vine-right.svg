@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 900" fill="none" aria-hidden="true">
+  <g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M120 10 C 140 120, 60 200, 110 320 S 150 540, 80 640 S 130 820, 90 890"/>
+    <path d="M112 110 C 150 108, 168 88, 156 68 C 144 54, 114 68, 108 98 Z" fill="currentColor" fill-opacity="0.14"/>
+    <path d="M75 200 C 38 200, 20 180, 32 160 C 46 146, 74 160, 82 188 Z" fill="currentColor" fill-opacity="0.18"/>
+    <path d="M120 300 C 156 294, 170 276, 160 256 C 148 242, 118 256, 112 288 Z" fill="currentColor" fill-opacity="0.12"/>
+    <path d="M82 400 C 42 406, 24 388, 36 368 C 50 352, 78 368, 86 394 Z" fill="currentColor" fill-opacity="0.18"/>
+    <path d="M120 500 C 158 492, 172 474, 160 454 C 148 440, 118 456, 112 488 Z" fill="currentColor" fill-opacity="0.14"/>
+    <path d="M78 590 C 38 600, 22 580, 34 560 C 48 544, 76 560, 84 584 Z" fill="currentColor" fill-opacity="0.18"/>
+    <path d="M114 690 C 152 684, 168 664, 156 644 C 144 630, 114 646, 108 676 Z" fill="currentColor" fill-opacity="0.12"/>
+    <path d="M80 780 C 40 790, 24 770, 36 750 C 50 734, 78 750, 86 776 Z" fill="currentColor" fill-opacity="0.18"/>
+    <circle cx="90" cy="890" r="2.4" fill="currentColor" fill-opacity="0.6"/>
+  </g>
+</svg>

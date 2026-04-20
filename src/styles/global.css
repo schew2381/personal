@@ -1,0 +1,85 @@
+@import "@fontsource-variable/fraunces/index.css";
+@import "@fontsource/eb-garamond/400.css";
+@import "@fontsource/eb-garamond/400-italic.css";
+@import "@fontsource/eb-garamond/500.css";
+@import "@fontsource/italianno/400.css";
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--body);
+  font-size: 19px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+body {
+  min-height: 100svh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-variation-settings: "SOFT" 60, "opsz" 144;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.script {
+  font-family: var(--script);
+  font-size: 1.9em;
+  line-height: 1;
+  color: var(--sage-deep);
+}
+
+.caps {
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.rule {
+  border: none;
+  border-top: var(--rule);
+  margin: 2rem 0;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--terracotta) 35%, transparent);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
