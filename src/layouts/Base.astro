@@ -17,6 +17,37 @@ const { title, variant = "page" } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="color-scheme" content="light" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script is:inline>
+      // Evict any service worker registered by a previous site on this origin
+      // (e.g. the old Chirpy blog) and clear its caches so normal reloads work.
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .getRegistrations()
+          .then((regs) => {
+            if (regs.length === 0) return;
+            Promise.all(regs.map((r) => r.unregister())).then(() => {
+              if (window.caches && caches.keys) {
+                caches.keys().then((keys) => {
+                  Promise.all(keys.map((k) => caches.delete(k))).then(() => {
+                    sessionStorage.setItem("sw-cleared", "1");
+                    if (!sessionStorage.getItem("sw-reloaded")) {
+                      sessionStorage.setItem("sw-reloaded", "1");
+                      location.reload();
+                    }
+                  });
+                });
+              } else if (!sessionStorage.getItem("sw-reloaded")) {
+                sessionStorage.setItem("sw-reloaded", "1");
+                location.reload();
+              }
+            });
+          })
+          .catch(() => {});
+      }
+    </script>
   </head>
   <body>
     <PaperBackground />
