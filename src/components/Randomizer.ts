@@ -11,6 +11,11 @@ interface Idea {
   notes?: string;
 }
 
+interface Quote {
+  text: string;
+  author: string;
+}
+
 const SUBREGION_LABEL: Record<string, string> = {
   westside: "SF · Westside",
   eastside: "SF · Eastside",
@@ -30,7 +35,9 @@ const ACCESS_LABEL: Record<Access, string> = {
   bus: "Bus",
 };
 
-const ideas: Idea[] = (window as unknown as { __IDEAS__: Idea[] }).__IDEAS__;
+const win = window as unknown as { __IDEAS__: Idea[]; __QUOTES__: Quote[] };
+const ideas: Idea[] = win.__IDEAS__;
+const quotes: Quote[] = win.__QUOTES__;
 
 const state = {
   locations: new Set<string>(),
@@ -46,6 +53,8 @@ const $$ = <T extends HTMLElement>(s: string) =>
 
 const card = $<HTMLDivElement>("#card");
 const ticker = $<HTMLSpanElement>("#ticker");
+const quoteText = $<HTMLQuoteElement>("#quote-text");
+const quoteAuthor = $<HTMLElement>("#quote-author");
 const meta = $<HTMLDivElement>("#meta");
 const metaWhere = $<HTMLSpanElement>("#meta-where");
 const metaAccessRow = $<HTMLDivElement>("#meta-access-row");
@@ -54,6 +63,7 @@ const metaTags = $<HTMLSpanElement>("#meta-tags");
 const pickBtn = $<HTMLButtonElement>("#pick");
 const resetBtn = $<HTMLButtonElement>("#reset");
 const poolEl = $<HTMLParagraphElement>("#pool");
+const catNote = $<HTMLParagraphElement>("#cat-note");
 
 function filtered(): Idea[] {
   const locs = state.locations;
@@ -76,6 +86,11 @@ function filtered(): Idea[] {
 function refreshPool() {
   const pool = filtered();
   const any = pool.length > 0;
+  const filtering =
+    state.locations.size > 0 ||
+    state.access.size > 0 ||
+    state.tags.size > 0;
+
   pickBtn.disabled = !any;
   const bayAreaSelected =
     state.locations.size === 0 ||
@@ -83,19 +98,49 @@ function refreshPool() {
   $$<HTMLButtonElement>('.chip[data-kind="access"]').forEach((c) => {
     c.disabled = !bayAreaSelected;
   });
+
   if (!any) {
     poolEl.textContent =
       "nothing matches — loosen a filter to cast a wider net";
-  } else if (
-    state.locations.size === 0 &&
-    state.access.size === 0 &&
-    state.tags.size === 0
-  ) {
+  } else if (!filtering) {
     poolEl.textContent = `${pool.length} specimens in the catalogue`;
   } else {
     poolEl.textContent = `${pool.length} matching ${
       pool.length === 1 ? "specimen" : "specimens"
     }`;
+  }
+
+  applyCatalogueFilter(pool, filtering);
+}
+
+function applyCatalogueFilter(pool: Idea[], filtering: boolean) {
+  const ids = new Set(pool.map((p) => p.id));
+  const items = $$<HTMLLIElement>(".cat-item");
+  items.forEach((el) => {
+    const id = el.dataset.id!;
+    el.hidden = !ids.has(id);
+  });
+  // hide empty subregion groups
+  $$<HTMLDivElement>(".cat-group").forEach((g) => {
+    const visible = Array.from(g.querySelectorAll<HTMLLIElement>(".cat-item"))
+      .some((li) => !li.hidden);
+    g.hidden = !visible;
+  });
+  // update region counts
+  const sfCount = pool.filter((p) => p.region === "sf").length;
+  const bayCount = pool.filter((p) => p.region === "bay_area").length;
+  const sfEl = document.querySelector<HTMLElement>(
+    '.cat-head-count[data-count="sf"]',
+  );
+  const bayEl = document.querySelector<HTMLElement>(
+    '.cat-head-count[data-count="bay_area"]',
+  );
+  if (sfEl) sfEl.textContent = String(sfCount);
+  if (bayEl) bayEl.textContent = String(bayCount);
+  if (catNote) {
+    catNote.textContent = filtering
+      ? `showing ${pool.length} of ${ideas.length} · clear filters to see all`
+      : "";
   }
 }
 
@@ -126,7 +171,6 @@ function renderReveal(pick: Idea) {
   ticker.textContent = pick.title;
   ticker.classList.remove("rolling");
   ticker.classList.remove("settling");
-  // reflow to restart animation
   void ticker.offsetWidth;
   ticker.classList.add("settling");
 
@@ -143,12 +187,10 @@ function renderReveal(pick: Idea) {
     .map((t) => `<span class="tag">${t.replace("-", " ")}</span>`)
     .join("");
   meta.hidden = false;
-  // restart fade-in animation
   meta.style.animation = "none";
   void meta.offsetWidth;
   meta.style.animation = "";
   card.dataset.state = "revealed";
-  // restart vine-draw
   const path = card.querySelector<SVGPathElement>(".card-vine path");
   if (path) {
     path.style.animation = "none";
@@ -185,7 +227,6 @@ async function roll() {
   }
   titles.push(final.title);
 
-  // ease-out cubic cumulative timing over ~2100ms
   const total = 2100;
   const delays: number[] = [];
   for (let i = 1; i <= frames; i++) {
@@ -217,7 +258,16 @@ async function roll() {
   state.lastPick = final;
 }
 
+function placeQuote() {
+  if (!quotes || quotes.length === 0) return;
+  const q = quotes[Math.floor(Math.random() * quotes.length)];
+  quoteText.textContent = q.text;
+  quoteAuthor.textContent = q.author;
+}
+
 function init() {
+  placeQuote();
+  card.dataset.state = "idle";
   $$<HTMLButtonElement>(".chip").forEach((btn) => {
     btn.setAttribute("aria-pressed", "false");
     btn.addEventListener("click", () => toggleChip(btn));

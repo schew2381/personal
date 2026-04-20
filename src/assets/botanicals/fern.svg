@@ -1,24 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 320" fill="none" aria-hidden="true">
-  <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M30 310 C 80 260, 150 180, 220 40"/>
-    <g stroke-opacity="0.85">
-      <path d="M50 280 C 40 260, 30 250, 20 248"/>
-      <path d="M65 258 C 54 236, 42 226, 30 222"/>
-      <path d="M82 234 C 70 210, 56 200, 44 196"/>
-      <path d="M100 206 C 86 180, 70 170, 56 166"/>
-      <path d="M118 176 C 104 150, 88 138, 74 132"/>
-      <path d="M138 146 C 124 120, 108 108, 94 102"/>
-      <path d="M158 116 C 146 92, 130 80, 116 74"/>
-      <path d="M180 86 C 168 62, 152 50, 138 44"/>
-    </g>
-    <g stroke-opacity="0.85">
-      <path d="M58 272 C 76 262, 86 250, 90 238"/>
-      <path d="M74 250 C 92 242, 104 228, 108 216"/>
-      <path d="M92 224 C 110 216, 122 200, 126 188"/>
-      <path d="M112 196 C 130 188, 142 172, 146 160"/>
-      <path d="M132 166 C 150 158, 162 142, 166 130"/>
-      <path d="M154 134 C 172 126, 184 110, 188 98"/>
-      <path d="M174 102 C 192 94, 204 78, 208 66"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360" fill="none" aria-hidden="true">
+  <g stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <!-- main rachis: curls up & to the right -->
+    <path d="M40 340 C 80 280, 110 230, 140 180 C 170 130, 200 90, 250 40 C 260 30, 264 42, 260 50" stroke-width="1.4"/>
+
+    <!-- leaflet pairs, each one a shallow leaf shape on either side of the rachis -->
+    <!-- group 1 (bottom) -->
+    <path d="M60 312 C 46 302, 34 298, 22 302 C 30 310, 46 316, 60 312 Z" fill="currentColor" fill-opacity="0.1"/>
+    <path d="M64 316 C 76 306, 88 304, 96 310 C 88 318, 74 320, 64 316 Z" fill="currentColor" fill-opacity="0.1"/>
+
+    <path d="M72 298 C 58 288, 44 284, 30 286 C 40 296, 56 302, 72 298 Z" fill="currentColor" fill-opacity="0.12"/>
+    <path d="M76 302 C 88 292, 100 290, 110 296 C 102 304, 86 306, 76 302 Z" fill="currentColor" fill-opacity="0.12"/>
+
+    <path d="M84 280 C 68 268, 54 266, 40 270 C 50 280, 68 286, 84 280 Z" fill="currentColor" fill-opacity="0.14"/>
+    <path d="M88 284 C 100 272, 114 270, 126 276 C 118 284, 100 288, 88 284 Z" fill="currentColor" fill-opacity="0.14"/>
+
+    <path d="M96 260 C 80 248, 66 246, 50 250 C 60 260, 78 266, 96 260 Z" fill="currentColor" fill-opacity="0.16"/>
+    <path d="M100 264 C 114 252, 128 250, 140 256 C 132 264, 114 268, 100 264 Z" fill="currentColor" fill-opacity="0.16"/>
+
+    <!-- middle bend -->
+    <path d="M110 238 C 94 226, 80 224, 64 228 C 74 238, 92 244, 110 238 Z" fill="currentColor" fill-opacity="0.17"/>
+    <path d="M114 242 C 128 230, 144 228, 156 234 C 148 242, 130 246, 114 242 Z" fill="currentColor" fill-opacity="0.17"/>
+
+    <path d="M124 216 C 108 204, 94 202, 78 206 C 88 216, 106 222, 124 216 Z" fill="currentColor" fill-opacity="0.17"/>
+    <path d="M128 220 C 142 208, 158 206, 170 212 C 162 220, 144 224, 128 220 Z" fill="currentColor" fill-opacity="0.17"/>
+
+    <path d="M138 194 C 124 182, 110 180, 96 184 C 106 194, 122 200, 138 194 Z" fill="currentColor" fill-opacity="0.16"/>
+    <path d="M142 198 C 156 186, 172 184, 184 190 C 176 198, 158 202, 142 198 Z" fill="currentColor" fill-opacity="0.16"/>
+
+    <!-- upper section -->
+    <path d="M154 170 C 140 158, 128 156, 114 160 C 124 170, 140 176, 154 170 Z" fill="currentColor" fill-opacity="0.14"/>
+    <path d="M158 174 C 172 162, 188 160, 200 166 C 192 174, 174 178, 158 174 Z" fill="currentColor" fill-opacity="0.14"/>
+
+    <path d="M170 146 C 158 134, 144 132, 132 136 C 140 146, 156 152, 170 146 Z" fill="currentColor" fill-opacity="0.12"/>
+    <path d="M174 150 C 188 138, 204 136, 216 142 C 208 150, 190 154, 174 150 Z" fill="currentColor" fill-opacity="0.12"/>
+
+    <path d="M186 122 C 174 112, 160 110, 150 114 C 158 122, 174 128, 186 122 Z" fill="currentColor" fill-opacity="0.10"/>
+    <path d="M190 126 C 204 114, 220 112, 232 118 C 224 126, 206 130, 190 126 Z" fill="currentColor" fill-opacity="0.10"/>
+
+    <path d="M204 98 C 192 90, 180 88, 170 92 C 178 100, 192 104, 204 98 Z" fill="currentColor" fill-opacity="0.09"/>
+    <path d="M208 102 C 222 92, 236 90, 246 96 C 238 104, 222 106, 208 102 Z" fill="currentColor" fill-opacity="0.09"/>
+
+    <path d="M222 74 C 214 68, 204 66, 196 70 C 202 76, 212 80, 222 74 Z" fill="currentColor" fill-opacity="0.08"/>
+    <path d="M226 78 C 238 70, 252 68, 260 72 C 254 80, 240 82, 226 78 Z" fill="currentColor" fill-opacity="0.08"/>
+
+    <!-- tip curl -->
+    <path d="M240 54 C 236 48, 230 46, 226 48 C 230 54, 236 58, 240 54 Z" fill="currentColor" fill-opacity="0.08"/>
+    <path d="M248 56 C 256 50, 262 50, 266 54 C 262 60, 254 60, 248 56 Z" fill="currentColor" fill-opacity="0.08"/>
+    <circle cx="258" cy="46" r="2" fill="currentColor" fill-opacity="0.5"/>
   </g>
 </svg>

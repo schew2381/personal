@@ -1,9 +1,35 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "~/layouts/Base.astro";
+import { QUOTES } from "~/data/quotes";
 
 const ideas = await getCollection("ideas");
 const data = ideas.map((i) => ({ id: i.id, ...i.data }));
+
+const SUBREGION_LABEL: Record<string, string> = {
+  westside: "Westside",
+  eastside: "Eastside",
+  middle: "Middle",
+  north: "North",
+  north_bay: "North Bay & Marin",
+  east_bay: "East Bay",
+  peninsula_south: "Peninsula & South",
+};
+
+const SF_SUBS = ["westside", "eastside", "middle", "north"];
+const OUT_SUBS = ["north_bay", "east_bay", "peninsula_south"];
+
+const sfGrouped = SF_SUBS.map((s) => ({
+  sub: s,
+  label: SUBREGION_LABEL[s],
+  items: data.filter((d) => d.region === "sf" && d.subregion === s),
+})).filter((g) => g.items.length > 0);
+
+const outGrouped = OUT_SUBS.map((s) => ({
+  sub: s,
+  label: SUBREGION_LABEL[s],
+  items: data.filter((d) => d.region === "bay_area" && d.subregion === s),
+})).filter((g) => g.items.length > 0);
 
 const LOCATION_GROUPS = [
   {
@@ -63,8 +89,12 @@ const VIBE_CHIPS = Array.from(allTags)
 
       <div class="aperture" id="aperture" aria-live="polite">
         <div class="ticker-slot">
-          <span class="ticker" id="ticker">press randomize</span>
+          <span class="ticker" id="ticker"></span>
         </div>
+        <figure class="quote" id="quote">
+          <blockquote id="quote-text"></blockquote>
+          <figcaption id="quote-author"></figcaption>
+        </figure>
       </div>
 
       <div class="meta" id="meta" hidden>
@@ -158,11 +188,96 @@ const VIBE_CHIPS = Array.from(allTags)
       </fieldset>
     </section>
 
+    <section class="catalogue" id="catalogue">
+      <h2 class="caps filter-title">The Full Catalogue</h2>
+      <p class="cat-note" id="cat-note"></p>
+
+      <div class="cat-column">
+        <h3 class="cat-head">
+          <span class="cat-head-label">In the City</span>
+          <span class="cat-head-rule" aria-hidden="true"></span>
+          <span class="cat-head-count" data-count="sf">{
+            data.filter((d) => d.region === "sf").length
+          }</span>
+        </h3>
+        {
+          sfGrouped.map((g) => (
+            <div class="cat-group" data-sub={g.sub}>
+              <h4 class="cat-sub">{g.label}</h4>
+              <ul class="cat-list">
+                {g.items.map((item) => (
+                  <li
+                    class="cat-item"
+                    data-id={item.id}
+                    data-region={item.region}
+                    data-sub={item.subregion}
+                    data-loc-key={`${item.region}:${item.subregion}`}
+                    data-access={item.access.join(",")}
+                    data-tags={item.tags.join(",")}
+                  >
+                    <span class="cat-title">{item.title}</span>
+                    <span class="cat-tags">
+                      {item.tags.map((t) => (
+                        <span class="cat-tag">{t.replace("-", " ")}</span>
+                      ))}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="cat-column">
+        <h3 class="cat-head">
+          <span class="cat-head-label">Beyond the City</span>
+          <span class="cat-head-rule" aria-hidden="true"></span>
+          <span class="cat-head-count" data-count="bay_area">{
+            data.filter((d) => d.region === "bay_area").length
+          }</span>
+        </h3>
+        {
+          outGrouped.map((g) => (
+            <div class="cat-group" data-sub={g.sub}>
+              <h4 class="cat-sub">{g.label}</h4>
+              <ul class="cat-list">
+                {g.items.map((item) => (
+                  <li
+                    class="cat-item"
+                    data-id={item.id}
+                    data-region={item.region}
+                    data-sub={item.subregion}
+                    data-loc-key={`${item.region}:${item.subregion}`}
+                    data-access={item.access.join(",")}
+                    data-tags={item.tags.join(",")}
+                  >
+                    <span class="cat-title">{item.title}</span>
+                    <span class="cat-access">
+                      {item.access.map((a) => (
+                        <span class="cat-access-chip">{a}</span>
+                      ))}
+                    </span>
+                    <span class="cat-tags">
+                      {item.tags.map((t) => (
+                        <span class="cat-tag">{t.replace("-", " ")}</span>
+                      ))}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
     <p class="back"><a href={import.meta.env.BASE_URL}>← back to the notebook</a></p>
   </section>
 
-  <script is:inline define:vars={{ data }}>
+  <script is:inline define:vars={{ data, quotes: QUOTES }}>
     window.__IDEAS__ = data;
+    window.__QUOTES__ = quotes;
   </script>
   <script>
     import "~/components/Randomizer.ts";
@@ -233,7 +348,7 @@ const VIBE_CHIPS = Array.from(allTags)
 
   .aperture {
     position: relative;
-    min-height: 3.6em;
+    min-height: 5.2em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,6 +359,50 @@ const VIBE_CHIPS = Array.from(allTags)
     overflow: hidden;
     padding: 0.3em 0;
     width: 100%;
+  }
+  .card[data-state="idle"] .ticker-slot {
+    display: none;
+  }
+  .card:not([data-state="idle"]) .quote {
+    display: none;
+  }
+  .quote {
+    margin: 0;
+    padding: 0.4em 0.6em;
+    max-width: 34rem;
+  }
+  .quote blockquote {
+    margin: 0;
+    font-family: var(--display);
+    font-variation-settings: "SOFT" 60, "opsz" 144, "wght" 360;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+    line-height: 1.4;
+    color: var(--ink);
+    position: relative;
+  }
+  .quote blockquote::before {
+    content: "\201C";
+    font-family: var(--display);
+    font-size: 2.6em;
+    line-height: 0.2;
+    color: var(--sage);
+    vertical-align: -0.45em;
+    margin-right: 0.05em;
+    opacity: 0.7;
+  }
+  .quote figcaption {
+    margin-top: 0.9rem;
+    font-family: var(--body);
+    font-style: normal;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .quote figcaption::before {
+    content: "— ";
+    color: var(--sage-deep);
   }
   .ticker {
     display: block;
@@ -471,6 +630,125 @@ const VIBE_CHIPS = Array.from(allTags)
   .chip[disabled] {
     opacity: 0.4;
     cursor: not-allowed;
+  }
+
+  .catalogue {
+    margin-top: 4rem;
+    padding-top: 2.4rem;
+    border-top: var(--rule);
+  }
+  .cat-note {
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin: -0.6rem 0 2rem;
+    min-height: 1.2em;
+  }
+  .cat-column {
+    margin-bottom: 2.4rem;
+  }
+  .cat-head {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 0 0 1.4rem;
+    font-family: var(--display);
+    font-variation-settings: "SOFT" 80, "opsz" 144, "wght" 420;
+    font-size: 1.3rem;
+    color: var(--ink);
+  }
+  .cat-head-rule {
+    flex: 1;
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--sage-deep) 38%, transparent);
+    transform: translateY(-0.2em);
+  }
+  .cat-head-count {
+    font-family: var(--body);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .cat-group {
+    margin-bottom: 1.3rem;
+  }
+  .cat-group[hidden] {
+    display: none;
+  }
+  .cat-sub {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--sage-deep);
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.04em;
+  }
+  .cat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .cat-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.4rem 1rem;
+    align-items: baseline;
+    padding: 0.55rem 0;
+    border-bottom: 1px dotted
+      color-mix(in srgb, var(--ink) 14%, transparent);
+    transition: opacity 180ms ease;
+  }
+  .cat-item[hidden] {
+    display: none;
+  }
+  .cat-title {
+    font-family: var(--body);
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .cat-tags,
+  .cat-access {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.3rem;
+  }
+  .cat-tag {
+    font-family: var(--body);
+    font-size: 0.72rem;
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
+    color: var(--sage-deep);
+    padding: 0.05rem 0.5rem;
+    border: 1px solid
+      color-mix(in srgb, var(--sage-deep) 30%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--sage) 6%, transparent);
+  }
+  .cat-access-chip {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--terracotta-deep);
+    padding: 0.05rem 0.5rem;
+    border: 1px solid
+      color-mix(in srgb, var(--terracotta) 40%, transparent);
+    border-radius: 2px;
+  }
+  @media (max-width: 560px) {
+    .cat-item {
+      grid-template-columns: 1fr;
+    }
+    .cat-tags,
+    .cat-access {
+      justify-content: flex-start;
+    }
   }
 
   .back {
