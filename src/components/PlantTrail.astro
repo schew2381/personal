@@ -39,7 +39,7 @@ const plants = Array.from(byPlant.entries())
 
   const MIN_INTERVAL = 1800; // ms between spawns
   const MIN_TRAVEL = 180; // px since last spawn
-  const MAX_LIVE = 4;
+  const MAX_LIVE = 8;
   // Stage slots sum to 16000ms. Each later stage is longer; stage 6 holds
   // the longest. Minimum slot is 1500ms so no transition ever feels rushed.
   const STAGE_SLOTS = [1500, 1700, 2000, 2500, 3300, 5000];
@@ -224,7 +224,7 @@ const plants = Array.from(byPlant.entries())
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 2;
+    z-index: 0;
     overflow: hidden;
   }
 
@@ -251,7 +251,6 @@ const plants = Array.from(byPlant.entries())
     width: 100%;
     height: 100%;
     object-fit: contain;
-    mix-blend-mode: multiply;
     opacity: 0;
     user-select: none;
     -webkit-user-drag: none;
