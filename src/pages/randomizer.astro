@@ -71,7 +71,7 @@ const VIBE_CHIPS = Array.from(allTags)
 
 <Base title="Date Randomizer — a botanical oracle">
   <section class="wrap">
-    <header class="head">
+    <header class="head above-plants">
       <p class="caps eyebrow">Project I</p>
       <h1 class="title">A Botanical Oracle</h1>
       <p class="script sub">for choosing an afternoon</p>
@@ -87,7 +87,7 @@ const VIBE_CHIPS = Array.from(allTags)
         <path d="M20 20 Q 340 4 660 20 Q 676 170 660 320 Q 340 336 20 320 Q 4 170 20 20 Z"/>
       </svg>
 
-      <div class="aperture" id="aperture" aria-live="polite">
+      <div class="aperture above-plants" id="aperture" aria-live="polite">
         <div class="ticker-slot">
           <span class="ticker" id="ticker"></span>
         </div>
@@ -97,7 +97,7 @@ const VIBE_CHIPS = Array.from(allTags)
         </figure>
       </div>
 
-      <div class="meta" id="meta" hidden>
+      <div class="meta above-plants" id="meta" hidden>
         <div class="meta-row">
           <span class="meta-label">where</span>
           <span class="meta-val" id="meta-where"></span>
@@ -114,7 +114,7 @@ const VIBE_CHIPS = Array.from(allTags)
       </div>
     </div>
 
-    <div class="controls">
+    <div class="controls above-plants">
       <button class="pick" id="pick" type="button">
         <span class="pick-inner">Randomize</span>
       </button>
@@ -122,7 +122,7 @@ const VIBE_CHIPS = Array.from(allTags)
       <p class="pool" id="pool"></p>
     </div>
 
-    <section class="filters">
+    <section class="filters above-plants">
       <h2 class="caps filter-title">Filters</h2>
 
       <fieldset class="group">
@@ -188,7 +188,7 @@ const VIBE_CHIPS = Array.from(allTags)
       </fieldset>
     </section>
 
-    <section class="catalogue" id="catalogue">
+    <section class="catalogue above-plants" id="catalogue">
       <h2 class="caps filter-title">The Full Catalogue</h2>
       <div class="cat-note" id="cat-note" aria-live="polite">
         <span class="cat-note-text" id="cat-note-text"></span>
@@ -310,7 +310,7 @@ const VIBE_CHIPS = Array.from(allTags)
       </details>
     </section>
 
-    <p class="back"><a href={import.meta.env.BASE_URL}>← back to the notebook</a></p>
+    <p class="back above-plants"><a href={import.meta.env.BASE_URL}>← back to the notebook</a></p>
   </section>
 
   <script is:inline define:vars={{ data, quotes: QUOTES }}>

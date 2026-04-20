@@ -59,8 +59,9 @@ const { title, variant = "page" } = Astro.props;
     </main>
     <style>
       .frame {
-        position: relative;
-        z-index: 1;
+        /* No stacking context here — plants (z-index: 1) render above
+           .frame's default layer. Child text content lifts itself back
+           above the plants via the `above-plants` utility. */
         max-width: 860px;
         margin: 0 auto;
         padding: clamp(3.5rem, 8vh, 6rem) clamp(1.25rem, 4vw, 2rem)

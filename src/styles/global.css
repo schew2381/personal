@@ -69,6 +69,13 @@ a {
   margin: 2rem 0;
 }
 
+/* Lift text/content above the PlantTrail layer (z-index: 1) while
+   leaving the parent section's background/box-shadow underneath. */
+.above-plants {
+  position: relative;
+  z-index: 2;
+}
+
 ::selection {
   background: color-mix(in srgb, var(--terracotta) 35%, transparent);
   color: var(--ink);
