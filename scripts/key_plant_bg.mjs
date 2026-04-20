@@ -14,10 +14,11 @@ import sharp from "sharp";
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, "..", "src", "assets", "plant_stages");
 
-// Tunables — wider range = softer edge. Values are perceptual luminance
-// 0..255. The Gemini backdrop sits around 235–245; tuned below.
-const LUMA_OPAQUE = 205;   // ≤ this luminance → fully opaque
-const LUMA_CLEAR = 238;    // ≥ this luminance → fully transparent
+// Tunables — the Gemini backdrop sits tightly in luma band 220–229
+// (measured: 66% of pixels). Plant bodies fall off at ~215. Catch the
+// backdrop while preserving pale-leaf midtones.
+const LUMA_OPAQUE = 195; // ≤ this luminance → fully opaque
+const LUMA_CLEAR = 219;  // ≥ this luminance → fully transparent
 
 function luma(r, g, b) {
   // Rec. 709 perceptual weights
